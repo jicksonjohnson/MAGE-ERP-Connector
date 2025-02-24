@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+        <observer name="erp_connector_customer_register_success" instance="HelloMage\ErpConnector\Observer\Frontend\Customer\RegisterSuccess"/>
+    </event>
+    <event name="customer_account_edited">
+        <observer name="erp_connector_customer_account_edited" instance="HelloMage\ErpConnector\Observer\Frontend\Customer\AccountEdit" />
+    </event>
+    <event name="controller_action_predispatch_customer_address_delete">
+        <observer name="erp_connector_frontend_customer_address_delete" instance="HelloMage\ErpConnector\Observer\Frontend\Customer\AddressDelete"/>
+    </event>
+</config>

@@ -1,0 +1,40 @@
+{
+    "name": "hellomage/erp-connector",
+    "description": "mage erp connector extension for magento",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "OSL-3.0"
+    ],
+    "authors": [
+        {
+            "name": "HELLOMAGE",
+            "email": "jicksonkoottala@gmail.com",
+            "homepage": "https://www.hellomage.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "magento/framework": "^102.0|^103.0",
+        "magento/module-backend": "102.0.*"
+    },
+    "keywords": [
+        "magento 2",
+        "magento2",
+        "admin",
+        "backend",
+        "creditmemo",
+        "sales",
+        "order",
+        "erp"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "HelloMage\\ErpConnector\\": ""
+        }
+    }
+}
+

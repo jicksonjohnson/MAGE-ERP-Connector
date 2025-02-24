@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="hellomage" translate="label" sortOrder="500">
+            <label>HelloMage Extensions</label>
+        </tab>
+        <section id="erp_connector" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="60">
+            <class>separator-top</class>
+            <label>ERP Connector</label>
+            <tab>hellomage</tab>
+            <resource>HelloMage_ErpConnector::config</resource>
+			<group id="settings" translate="label" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10">
+                <label>ERP Connector Settings</label>
+                <field id="env" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Environment</label>
+                    <source_model>HelloMage\ErpConnector\Model\Config\Source\Environment</source_model>
+                </field>
+                <field id="live_url" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Live URL</label>
+                </field>
+                <field id="stage_url" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Stage URL</label>
+                </field>
+                <field id="live_access_token" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Production Access Token</label>
+                </field>
+                <field id="live_access_token_updated_at" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Live Access Token Updated At</label>
+                </field>
+                <field id="stage_access_token" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Stage Access Token</label>
+                </field>
+                <field id="stage_access_token_updated_at" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Stage Access Token Updated At</label>
+                </field>
+                <field id="auth_email" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Authenticate Email</label>
+                </field>
+                <field id="auth_password" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Authenticate Password</label>
+                </field>
+                <field id="secrete_code" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Secrete Code</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

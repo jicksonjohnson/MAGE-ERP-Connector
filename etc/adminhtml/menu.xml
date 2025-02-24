@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="HelloMage_ErpConnector::parent"
+             title="ERP API Connector"
+             module="HelloMage_ErpConnector"
+             sortOrder="100"
+             parent="Magento_Backend::system"
+             resource="HelloMage_ErpConnector::parent"/>
+        <add id="HelloMage_ErpConnector::records"
+             title="Event Records"
+             module="HelloMage_ErpConnector"
+             sortOrder="10"
+             parent="HelloMage_ErpConnector::parent"
+             action="erp_connector/index/index"
+             resource="HelloMage_ErpConnector::records" />
+        <add id="HelloMage_ErpConnector::config"
+             title="Configuration"
+             module="HelloMage_ErpConnector"
+             sortOrder="9999"
+             parent="HelloMage_ErpConnector::parent"
+             action="adminhtml/system_config/edit/section/erp_connector"
+             resource="HelloMage_ErpConnector::config" />
+    </menu>
+</config>

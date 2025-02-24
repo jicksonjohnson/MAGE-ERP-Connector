@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">erp_connector_listing.erp_connector_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>erp_connector_listing_columns</spinner>
+        <deps>
+            <dep>erp_connector_listing.erp_connector_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="erp_connector_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">record_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>HelloMage_ErpConnector::records</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="erp_connector_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>record_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="erp_connector_listing_columns">
+        <column name="record_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Record ID</label>
+            </settings>
+        </column>
+        <column name="entity_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Entity ID</label>
+            </settings>
+        </column>
+        <column name="type">
+            <settings>
+                <label translate="true">Type</label>
+            </settings>
+        </column>
+        <column name="event">
+            <settings>
+                <label translate="true">Event</label>
+            </settings>
+        </column>
+        <column name="note">
+            <settings>
+                <label translate="true">Note</label>
+            </settings>
+        </column>
+        <column name="creation_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Updated</label>
+            </settings>
+        </column>
+        <column name="update_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Updated On</label>
+            </settings>
+        </column>
+        <column name="status" class="HelloMage\ErpConnector\Ui\Component\Listing\Column\Status">
+            <settings>
+                <options class="HelloMage\ErpConnector\Model\Config\Source\Status"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+    </columns>
+</listing>

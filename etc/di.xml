@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="HelloMage\ErpConnector\Api\Data\RecordInterface" type="HelloMage\ErpConnector\Model\Record"/>
+    <preference for="HelloMage\ErpConnector\Api\RecordRepositoryInterface" type="HelloMage\ErpConnector\Model\RecordRepository"/>
+    <preference for="HelloMage\ErpConnector\Api\Data\RecordSearchResultsInterface" type="HelloMage\ErpConnector\Model\RecordSearchResults" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="erp_connector_listing_data_source" xsi:type="string">HelloMage\ErpConnector\Model\ResourceModel\Record\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="HelloMage\ErpConnector\Model\ResourceModel\Record\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">hellomage_erp_api_connector_records</argument>
+            <argument name="eventPrefix" xsi:type="string">hellomage_erp_api_connector_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">hellomage_erp_api_connector_collection</argument>
+            <argument name="resourceModel" xsi:type="string">HelloMage\ErpConnector\Model\ResourceModel\Record</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="HelloMage\ErpConnector\Api\Data\RecordInterface" xsi:type="string">HelloMage\ErpConnector\Api\RecordRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="HelloMage\ErpConnector\Api\Data\RecordInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">hellomage_erp_api_connector_records</item>
+                    <item name="identifierField" xsi:type="string">record_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="HelloMage\ErpConnector\Api\Data\RecordInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="HelloMage\ErpConnector\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="HelloMage\ErpConnector\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">erpConnectionLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">HelloMage\ErpConnector\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

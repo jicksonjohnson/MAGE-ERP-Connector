@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <erp_connector>
+			<settings>
+				<env>staging</env>
+				<live_url>http://{mageerp_live_url_or_host_ip}/</live_url>
+				<stage_url>http://{mageerp_stage_url_or_host_ip}/</stage_url>
+				<live_access_token>NULL</live_access_token>
+				<live_token_updated_at>NULL</live_token_updated_at>
+				<stage_token_updated_at>NULL</stage_token_updated_at>
+				<stage_access_token>NULL</stage_access_token>
+				<auth_email>jickson@hellomage.com</auth_email>
+				<auth_password>{auth_password}</auth_password>
+				<secrete_code>{secrete_code}</secrete_code>
+			</settings>
+		</erp_connector>
+    </default>
+</config>
