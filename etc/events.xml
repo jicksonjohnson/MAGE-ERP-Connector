@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * HelloMage
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customise this module for your needs.
+ * Please contact us jicksonkoottala@gmail.com
+ *
+ * @category   HelloMage
+ * @package    HelloMage_ErpConnector
+ * @copyright  Copyright (C) 2020 HELLOMAGE PVT LTD (https://www.hellomage.com/)
+ * @license    https://www.hellomage.com/magento2-osl-3-0-license/
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="sales_order_save_after">
-        <observer name="erp_connector_sales_order_save_after" instance="HelloMage\ErpConnector\Observer\OrderSaveAfter" />
+        <observer name="erp_connector_sales_order_save_after"
+                  instance="HelloMage\ErpConnector\Observer\OrderSaveAfter" />
     </event>
     <event name="sales_order_place_after">
-        <observer name="erp_connector_sales_order_place_after" instance="HelloMage\ErpConnector\Observer\OrderPlaceAfter"/>
+        <observer name="erp_connector_sales_order_place_after"
+                  instance="HelloMage\ErpConnector\Observer\OrderPlaceAfter"/>
     </event>
     <event name="sales_order_invoice_save_after">
-        <observer name="erp_connector_sales_order_invoice_save_after" instance="HelloMage\ErpConnector\Observer\InvoiceSaveAfter" />
+        <observer name="erp_connector_sales_order_invoice_save_after"
+                  instance="HelloMage\ErpConnector\Observer\InvoiceSaveAfter" />
     </event>
     <event name="sales_order_shipment_save_after">
-        <observer name="erp_connector_sales_order_shipment_save_after" instance="HelloMage\ErpConnector\Observer\ShipmentSaveAfter" />
+        <observer name="erp_connector_sales_order_shipment_save_after"
+                  instance="HelloMage\ErpConnector\Observer\ShipmentSaveAfter" />
     </event>
     <event name="sales_order_creditmemo_save_after">
-        <observer name="erp_connector_sales_order_creditmemo_save_after" instance="HelloMage\ErpConnector\Observer\CreditMemoSaveAfter"/>
+        <observer name="erp_connector_sales_order_creditmemo_save_after"
+                  instance="HelloMage\ErpConnector\Observer\CreditMemoSaveAfter"/>
     </event>
     <event name="customer_delete_after">
-        <observer name="erp_connector_customer_delete_after" instance="HelloMage\ErpConnector\Observer\CustomerDeleteAfter"/>
+        <observer name="erp_connector_customer_delete_after"
+                  instance="HelloMage\ErpConnector\Observer\CustomerDeleteAfter"/>
     </event>
     <event name="customer_address_save_after">
-        <observer name="erp_connector_customer_address_save_afterr" instance="HelloMage\ErpConnector\Observer\CustomerAddressSaveAfter"/>
+        <observer name="erp_connector_customer_address_save_afterr"
+                  instance="HelloMage\ErpConnector\Observer\CustomerAddressSaveAfter"/>
     </event>
 </config>

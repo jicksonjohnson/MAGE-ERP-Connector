@@ -1,4 +1,16 @@
 <?php
+/**
+ * HelloMage
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customise this module for your needs.
+ * Please contact us jicksonkoottala@gmail.com
+ *
+ * @category   HelloMage
+ * @package    HelloMage_ErpConnector
+ * @copyright  Copyright (C) 2020 HELLOMAGE PVT LTD (https://www.hellomage.com/)
+ * @license    https://www.hellomage.com/magento2-osl-3-0-license/
+ */
 
 declare(strict_types=1);
 
@@ -8,80 +20,102 @@ use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\Url;
+use Magento\Cms\Model\PageFactory;
+use Magento\Cms\Model\Template\FilterProvider;
 
+/**
+ * Class Data
+ * @package HelloMage\ErpConnector\Helper\Data
+ */
 class Data extends AbstractHelper
 {
+    /**
+     * @var StoreManagerInterface
+     */
     protected StoreManagerInterface $_storeManager;
 
-	protected \Magento\Framework\Url $_url;
+    /**
+     * @var Url
+     */
+    protected Url $_url;
 
-	protected \Magento\Cms\Model\PageFactory $_pageFactory;
+    /**
+     * @var PageFactory
+     */
+    protected PageFactory $_pageFactory;
 
-	protected \Magento\Cms\Model\Template\FilterProvider $_filterProvider;
+    /**
+     * @var FilterProvider
+     */
+    protected FilterProvider $_filterProvider;
 
     /**
      * Helper Data constructor.
      *
      * @param Context $context
-     * @param \Magento\Framework\Url $url
-     * @param \Magento\Cms\Model\PageFactory $pageFactory
-     * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
+     * @param Url $url
+     * @param PageFactory $pageFactory
+     * @param FilterProvider $filterProvider
      * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         Context $context,
-		\Magento\Framework\Url $url,
-		\Magento\Cms\Model\PageFactory $pageFactory,
-		\Magento\Cms\Model\Template\FilterProvider $filterProvider,
+        Url $url,
+        PageFactory $pageFactory,
+        FilterProvider $filterProvider,
         StoreManagerInterface $storeManager
     ) {
         $this->_storeManager = $storeManager;
-		$this->_url = $url;
-		$this->_pageFactory = $pageFactory;
-		$this->_filterProvider = $filterProvider;
+        $this->_url = $url;
+        $this->_pageFactory = $pageFactory;
+        $this->_filterProvider = $filterProvider;
         parent::__construct($context);
     }
 
     /**
-     * Get Store configuration
+     * Get store configuration by path.
      *
-     * @param $path
-     * @param null $store
+     * @param string $path
+     * @param null|int|string $store
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getStoreConfig($path, $store = null)
+    public function getStoreConfig(string $path, $store = null)
     {
-        if ($store == null || $store == '') {
+        if ($store === null || $store === '') {
             $store = $this->_storeManager->getStore()->getId();
         }
         $store = $this->_storeManager->getStore($store);
 
-        return $config = $this->scopeConfig->getValue(
+        return $this->scopeConfig->getValue(
             $path,
             ScopeInterface::SCOPE_STORE,
-            $store);
+            $store
+        );
     }
 
     /**
-     * Get URL
+     * Get URL by identifier.
      *
-     * @param $identifier
+     * @param string $identifier
      * @return string
      */
-	public function getUrlBuilder($identifier){
-		return $this->_url->getUrl($identifier);
-	}
+    public function getUrlBuilder(string $identifier): string
+    {
+        return $this->_url->getUrl($identifier);
+    }
 
     /**
-     * Get CMS Page Content
+     * Get CMS page content by identifier.
      *
-     * @param $identifier
+     * @param string $identifier
      * @return string
      * @throws \Exception
      */
-	function getPageContent($identifier){
-		$page = $this->_pageFactory->create()->load($identifier);
-		return $this->_filterProvider->getPageFilter()->filter($page->getContent());
-	}
+    public function getPageContent(string $identifier): string
+    {
+        $page = $this->_pageFactory->create()->load($identifier);
+        return $this->_filterProvider->getPageFilter()->filter($page->getContent());
+    }
 }

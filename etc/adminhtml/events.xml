@@ -1,25 +1,46 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * HelloMage
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customise this module for your needs.
+ * Please contact us jicksonkoottala@gmail.com
+ *
+ * @category   HelloMage
+ * @package    HelloMage_ErpConnector
+ * @copyright  Copyright (C) 2020 HELLOMAGE PVT LTD (https://www.hellomage.com/)
+ * @license    https://www.hellomage.com/magento2-osl-3-0-license/
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="adminhtml_customer_save_after">
-        <observer name="erp_connector_adminhtml_customer_save_after" instance="HelloMage\ErpConnector\Observer\Adminhtml\Customer\SaveAfter"/>
+        <observer name="erp_connector_adminhtml_customer_save_after"
+                  instance="HelloMage\ErpConnector\Observer\Adminhtml\Customer\SaveAfter"/>
     </event>
     <event name="mageworx_ordereditor_sales_order_delete">
-        <observer name="erp_connector_adminhtml_order_delete" instance="HelloMage\ErpConnector\Observer\Adminhtml\Order\Delete" />
+        <observer name="erp_connector_adminhtml_order_delete"
+                  instance="HelloMage\ErpConnector\Observer\Adminhtml\Order\Delete" />
     </event>
     <event name="hellomage_delete_credit_memo_event">
-        <observer name="erp_connector_adminhtml_credit_memo_delete" instance="HelloMage\ErpConnector\Observer\Adminhtml\Creditmemo\Delete" />
+        <observer name="erp_connector_adminhtml_credit_memo_delete"
+                  instance="HelloMage\ErpConnector\Observer\Adminhtml\Creditmemo\Delete" />
     </event>
     <event name="hellomage_delete_invoice_event">
-        <observer name="erp_connector_adminhtml_invoice_delete" instance="HelloMage\ErpConnector\Observer\Adminhtml\Invoice\Delete" />
+        <observer name="erp_connector_adminhtml_invoice_delete"
+                  instance="HelloMage\ErpConnector\Observer\Adminhtml\Invoice\Delete" />
     </event>
     <event name="hellomage_delete_shipment_event">
-        <observer name="erp_connector_adminhtml_shipment_delete" instance="HelloMage\ErpConnector\Observer\Adminhtml\Shipment\Delete" />
+        <observer name="erp_connector_adminhtml_shipment_delete"
+                  instance="HelloMage\ErpConnector\Observer\Adminhtml\Shipment\Delete" />
     </event>
     <event name="controller_action_postdispatch_customer_index_inlineEdit">
-        <observer name="erp_connector_adminhtml_customer_inlineedit" instance="HelloMage\ErpConnector\Observer\Adminhtml\Customer\InlineEdit"/>
+        <observer name="erp_connector_adminhtml_customer_inlineedit"
+                  instance="HelloMage\ErpConnector\Observer\Adminhtml\Customer\InlineEdit"/>
     </event>
     <event name="controller_action_predispatch_customer_address_delete">
-        <observer name="erp_connector_adminhtml_customer_address_delete" instance="HelloMage\ErpConnector\Observer\Adminhtml\Customer\AddressDelete"/>
+        <observer name="erp_connector_adminhtml_customer_address_delete"
+                  instance="HelloMage\ErpConnector\Observer\Adminhtml\Customer\AddressDelete"/>
     </event>
 </config>

@@ -1,13 +1,31 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * HelloMage
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customise this module for your needs.
+ * Please contact us jicksonkoottala@gmail.com
+ *
+ * @category   HelloMage
+ * @package    HelloMage_ErpConnector
+ * @copyright  Copyright (C) 2020 HELLOMAGE PVT LTD (https://www.hellomage.com/)
+ * @license    https://www.hellomage.com/magento2-osl-3-0-license/
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="HelloMage\ErpConnector\Api\Data\RecordInterface" type="HelloMage\ErpConnector\Model\Record"/>
-    <preference for="HelloMage\ErpConnector\Api\RecordRepositoryInterface" type="HelloMage\ErpConnector\Model\RecordRepository"/>
-    <preference for="HelloMage\ErpConnector\Api\Data\RecordSearchResultsInterface" type="HelloMage\ErpConnector\Model\RecordSearchResults" />
+    <preference for="HelloMage\ErpConnector\Api\Data\RecordInterface"
+                type="HelloMage\ErpConnector\Model\Record"/>
+    <preference for="HelloMage\ErpConnector\Api\RecordRepositoryInterface"
+                type="HelloMage\ErpConnector\Model\RecordRepository"/>
+    <preference for="HelloMage\ErpConnector\Api\Data\RecordSearchResultsInterface"
+                type="HelloMage\ErpConnector\Model\RecordSearchResults" />
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="erp_connector_listing_data_source" xsi:type="string">HelloMage\ErpConnector\Model\ResourceModel\Record\Grid\Collection</item>
+                <item name="erp_connector_listing_data_source"
+                      xsi:type="string">HelloMage\ErpConnector\Model\ResourceModel\Record\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
@@ -22,7 +40,8 @@
     <type name="Magento\Framework\Model\Entity\RepositoryFactory">
         <arguments>
             <argument name="entities" xsi:type="array">
-                <item name="HelloMage\ErpConnector\Api\Data\RecordInterface" xsi:type="string">HelloMage\ErpConnector\Api\RecordRepositoryInterface</item>
+                <item name="HelloMage\ErpConnector\Api\Data\RecordInterface"
+                      xsi:type="string">HelloMage\ErpConnector\Api\RecordRepositoryInterface</item>
             </argument>
         </arguments>
     </type>
@@ -39,7 +58,8 @@
     <type name="Magento\Framework\EntityManager\HydratorPool">
         <arguments>
             <argument name="hydrators" xsi:type="array">
-                <item name="HelloMage\ErpConnector\Api\Data\RecordInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="HelloMage\ErpConnector\Api\Data\RecordInterface"
+                      xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
             </argument>
         </arguments>
     </type>

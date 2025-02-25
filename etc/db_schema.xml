@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * HelloMage
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customise this module for your needs.
+ * Please contact us jicksonkoottala@gmail.com
+ *
+ * @category   HelloMage
+ * @package    HelloMage_ErpConnector
+ * @copyright  Copyright (C) 2020 HELLOMAGE PVT LTD (https://www.hellomage.com/)
+ * @license    https://www.hellomage.com/magento2-osl-3-0-license/
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="hellomage_erp_api_connector_records"
+           resource="default"
+           engine="innodb"
+           comment="HelloMage ERP API Connector Table">
+        <column xsi:type="int"
+                name="record_id"
+                padding="10"
+                unsigned="true"
+                nullable="false"
+                identity="true"
+                comment="Record ID"/>
+        <column xsi:type="int"
+                name="entity_id"
+                padding="10"
+                unsigned="true"
+                nullable="false"
+                comment="Entity Id"/>
+        <column xsi:type="varchar"
+                name="event"
+                nullable="true"
+                length="255"
+                comment="Event"/>
+        <column xsi:type="varchar"
+                name="note"
+                nullable="true"
+                length="255"
+                comment="Note"/>
+        <column xsi:type="varchar"
+                name="type"
+                nullable="true"
+                length="255"
+                comment="Type"/>
+        <column xsi:type="int"
+                name="status"
+                padding="10"
+                unsigned="true"
+                nullable="false"
+                default="0"
+                comment="Status"/>
+        <column xsi:type="timestamp"
+                name="creation_time"
+                on_update="false"
+                nullable="false"
+                comment="Created Time"/>
+        <column xsi:type="timestamp"
+                name="update_time"
+                on_update="true"
+                nullable="false"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="record_id"/>
+        </constraint>
+    </table>
+</schema>

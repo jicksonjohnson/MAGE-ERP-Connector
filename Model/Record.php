@@ -1,4 +1,16 @@
 <?php
+/**
+ * HelloMage
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customise this module for your needs.
+ * Please contact us jicksonkoottala@gmail.com
+ *
+ * @category   HelloMage
+ * @package    HelloMage_ErpConnector
+ * @copyright  Copyright (C) 2020 HELLOMAGE PVT LTD (https://www.hellomage.com/)
+ * @license    https://www.hellomage.com/magento2-osl-3-0-license/
+ */
 
 namespace HelloMage\ErpConnector\Model;
 
@@ -6,6 +18,10 @@ use HelloMage\ErpConnector\Api\Data\RecordInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 
+/**
+ * Class Record
+ * @package HelloMage\ErpConnector\Model\Record
+ */
 class Record extends AbstractModel implements RecordInterface, IdentityInterface
 {
     /**
@@ -60,7 +76,7 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
     /**
      * @return int|null
      */
-    public function getId()
+    public function getId():?int
     {
         return $this->getData(self::RECORD_ID);
     }
@@ -68,31 +84,31 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
     /**
      * @return int
      */
-    public function getEntityId()
+    public function getEntityId(): int
     {
         return $this->getData(self::ENTITY_ID);
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->getData(self::TYPE);
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEvent()
+    public function getEvent(): ?string
     {
         return $this->getData(self::EVENT);
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNote()
+    public function getNote(): ?string
     {
         return $this->getData(self::NOTE);
     }
@@ -100,7 +116,7 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
     /**
      * @return int
      */
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->getData(self::STATUS);
     }
@@ -108,15 +124,15 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
     /**
      * @return string
      */
-    public function getCreationTime()
+    public function getCreationTime(): string
     {
         return $this->getData(self::CREATION_TIME);
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUpdateTime()
+    public function getUpdateTime(): ?string
     {
         return $this->getData(self::UPDATE_TIME);
     }
@@ -125,7 +141,7 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
      * @param $id
      * @return RecordInterface
      */
-    public function setId($id)
+    public function setId($id): RecordInterface
     {
         return $this->setData(self::RECORD_ID, $id);
     }
@@ -134,7 +150,7 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
      * @param $entityId
      * @return RecordInterface
      */
-    public function setEntityId($entityId)
+    public function setEntityId($entityId): RecordInterface
     {
         return $this->setData(self::ENTITY_ID, $entityId);
     }
@@ -143,7 +159,7 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
      * @param $type
      * @return RecordInterface
      */
-    public function setType($type)
+    public function setType($type): RecordInterface
     {
         return $this->setData(self::TYPE, $type);
     }
@@ -152,25 +168,25 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
      * @param $event
      * @return RecordInterface
      */
-    public function setEvent($event)
+    public function setEvent($event): RecordInterface
     {
         return $this->setData(self::EVENT, $event);
     }
 
     /**
-     * @param $note
+     * @param string $note
      * @return RecordInterface
      */
-    public function setNote($note)
+    public function setNote(string $note): RecordInterface
     {
         return $this->setData(self::NOTE, $note);
     }
 
     /**
-     * @param $status
+     * @param int $status
      * @return RecordInterface
      */
-    public function setStatus($status)
+    public function setStatus(int $status): RecordInterface
     {
         return $this->setData(self::STATUS, $status);
     }
@@ -178,10 +194,10 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
     /**
      * Set create time
      *
-     * @param $creationTime
+     * @param string $creationTime
      * @return RecordInterface
      */
-    public function setCreationTime($creationTime)
+    public function setCreationTime(string $creationTime): RecordInterface
     {
         return $this->setData(self::CREATION_TIME, $creationTime);
     }
@@ -189,10 +205,10 @@ class Record extends AbstractModel implements RecordInterface, IdentityInterface
     /**
      * Set update time
      *
-     * @param $updationTime
+     * @param string $updationTime
      * @return RecordInterface
      */
-    public function setUpdateTime($updationTime)
+    public function setUpdateTime(string $updationTime): RecordInterface
     {
         return $this->setData(self::UPDATE_TIME, $updationTime);
     }

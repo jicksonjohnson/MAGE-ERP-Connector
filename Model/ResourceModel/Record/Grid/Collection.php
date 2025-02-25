@@ -1,4 +1,16 @@
 <?php
+/**
+ * HelloMage
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customise this module for your needs.
+ * Please contact us jicksonkoottala@gmail.com
+ *
+ * @category   HelloMage
+ * @package    HelloMage_ErpConnector
+ * @copyright  Copyright (C) 2020 HELLOMAGE PVT LTD (https://www.hellomage.com/)
+ * @license    https://www.hellomage.com/magento2-osl-3-0-license/
+ */
 
 declare(strict_types=1);
 
@@ -9,13 +21,18 @@ use Magento\Framework\Api\Search\AggregationInterface;
 use HelloMage\ErpConnector\Model\ResourceModel\Record\Collection as RecordCollection;
 
 /**
- * Collection for displaying grid of records
+ * Collection for displaying grid of records.
  */
 class Collection extends RecordCollection implements SearchResultInterface
 {
+    /**
+     * @var AggregationInterface
+     */
     protected AggregationInterface $aggregations;
 
     /**
+     * Collection constructor.
+     *
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
@@ -28,7 +45,7 @@ class Collection extends RecordCollection implements SearchResultInterface
      * @param string $resourceModel
      * @param string $model
      * @param \Magento\Framework\DB\Adapter\AdapterInterface|string|null $connection
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource
+     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb|null $resource
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -64,6 +81,8 @@ class Collection extends RecordCollection implements SearchResultInterface
     }
 
     /**
+     * Get aggregation interface instance
+     *
      * @return AggregationInterface
      */
     public function getAggregations()
@@ -72,6 +91,8 @@ class Collection extends RecordCollection implements SearchResultInterface
     }
 
     /**
+     * Set aggregation interface instance
+     *
      * @param AggregationInterface $aggregations
      * @return $this
      */

@@ -1,16 +1,33 @@
 <?php
+/**
+ * HelloMage
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customise this module for your needs.
+ * Please contact us jicksonkoottala@gmail.com
+ *
+ * @category   HelloMage
+ * @package    HelloMage_ErpConnector
+ * @copyright  Copyright (C) 2020 HELLOMAGE PVT LTD (https://www.hellomage.com/)
+ * @license    https://www.hellomage.com/magento2-osl-3-0-license/
+ */
 
 declare(strict_types=1);
 
 namespace HelloMage\ErpConnector\Model;
 
+use Exception;
 use HelloMage\ErpConnector\Api\Data\RecordInterface;
+use HelloMage\ErpConnector\Api\Data\RecordInterfaceFactory;
+use HelloMage\ErpConnector\Api\Data\RecordSearchResultsInterface;
 use HelloMage\ErpConnector\Api\RecordRepositoryInterface;
 use HelloMage\ErpConnector\Api\Data;
 use HelloMage\ErpConnector\Model\ResourceModel\Record as ResourceRecord;
+use HelloMage\ErpConnector\Model\ResourceModel\Record\Collection;
 use HelloMage\ErpConnector\Model\ResourceModel\Record\CollectionFactory as RecordCollectionFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -19,6 +36,7 @@ use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\EntityManager\HydratorInterface;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
+
 /**
  * Default Record repo impl.
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -37,7 +55,7 @@ class RecordRepository implements RecordRepositoryInterface
 
     protected DataObjectProcessor $dataObjectProcessor;
 
-    protected Data\RecordInterfaceFactory $dataRecordFactory;
+    protected RecordInterfaceFactory $dataRecordFactory;
 
     private StoreManagerInterface $storeManager;
 
@@ -53,7 +71,7 @@ class RecordRepository implements RecordRepositoryInterface
     /**
      * @param ResourceRecord $resource
      * @param RecordFactory $recordFactory
-     * @param Data\RecordInterfaceFactory $dataRecordFactory
+     * @param RecordInterfaceFactory $dataRecordFactory
      * @param RecordCollectionFactory $recordCollectionFactory
      * @param Data\RecordSearchResultsInterfaceFactory $searchResultsFactory
      * @param DataObjectHelper $dataObjectHelper
@@ -68,7 +86,7 @@ class RecordRepository implements RecordRepositoryInterface
     public function __construct(
         ResourceRecord $resource,
         RecordFactory $recordFactory,
-        \HelloMage\ErpConnector\Api\Data\RecordInterfaceFactory $dataRecordFactory,
+        RecordInterfaceFactory $dataRecordFactory,
         RecordCollectionFactory $recordCollectionFactory,
         Data\RecordSearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
@@ -94,19 +112,19 @@ class RecordRepository implements RecordRepositoryInterface
     /**
      * Save Record data
      *
-     * @param \HelloMage\ErpConnector\Api\Data\RecordInterface $record
+     * @param RecordInterface $record
      * @return Record
      * @throws CouldNotSaveException
      * @throws NoSuchEntityException
      */
-    public function save(Data\RecordInterface $record)
+    public function save(RecordInterface $record): RecordInterface
     {
         if ($record->getId() && $record instanceof Record && !$record->getOrigData()) {
             $record = $this->hydrator->hydrate($this->getById($record->getId()), $this->hydrator->extract($record));
         }
         try {
             $this->resource->save($record);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw new CouldNotSaveException(__($exception->getMessage()));
         }
         return $record;
@@ -117,9 +135,9 @@ class RecordRepository implements RecordRepositoryInterface
      *
      * @param string $recordId
      * @return Record
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
-    public function getById($recordId)
+    public function getById($recordId): RecordInterface
     {
         $record = $this->recordFactory->create();
         $this->resource->load($record, $recordId);
@@ -134,17 +152,17 @@ class RecordRepository implements RecordRepositoryInterface
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $criteria
-     * @return \HelloMage\ErpConnector\Api\Data\RecordSearchResultsInterface
+     * @param SearchCriteriaInterface $criteria
+     * @return RecordSearchResultsInterface
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria)
+    public function getList(SearchCriteriaInterface $criteria): RecordSearchResultsInterface
     {
-        /** @var \HelloMage\ErpConnector\Model\ResourceModel\Record\Collection $collection */
+        /** @var Collection $collection */
         $collection = $this->recordCollectionFactory->create();
 
         $this->collectionProcessor->process($criteria, $collection);
 
-        /** @var Data\RecordSearchResultsInterface $searchResults */
+        /** @var RecordSearchResultsInterface $searchResults */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
         $searchResults->setItems($collection->getItems());
@@ -155,21 +173,26 @@ class RecordRepository implements RecordRepositoryInterface
     /**
      * Delete Record
      *
-     * @param \HelloMage\ErpConnector\Api\Data\RecordInterface $record
+     * @param RecordInterface $record
      * @return bool
      * @throws CouldNotDeleteException
      */
-    public function delete(Data\RecordInterface $record)
+    public function delete(RecordInterface $record): bool
     {
         try {
             $this->resource->delete($record);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw new CouldNotDeleteException(__($exception->getMessage()));
         }
         return true;
     }
 
-    public function markAsCompleted($id)
+    /**
+     * @param $id
+     * @return false|RecordSearchResultsInterface
+     * @throws NoSuchEntityException
+     */
+    public function markAsCompleted($id): RecordSearchResultsInterface
     {
         try {
             $item = $this->recordFactory->create();
@@ -181,7 +204,7 @@ class RecordRepository implements RecordRepositoryInterface
                 'status' => 2
             ])->save();
             return $item;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new NoSuchEntityException(__('some issue found wih updating data "%1"', $e->getMessage()));
         }
     }
